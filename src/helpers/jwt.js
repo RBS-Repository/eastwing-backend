@@ -1,6 +1,5 @@
 const JWT = require("jsonwebtoken");
 const Boom = require("boom");
-const redis = require("../clients/redis");
 
 const signAccessToken = (data) => {
 	return new Promise((resolve, reject) => {
@@ -59,34 +58,21 @@ const signRefreshToken = (user_id) => {
 				console.log(err);
 				reject(Boom.internal());
 			}
-
-			redis.set(user_id, token, "EX", 180 * 24 * 60 * 60);
-
 			resolve(token);
 		});
 	});
 };
 
 const verifyRefreshToken = async (refresh_token) => {
-	return new Promise(async (resolve, reject) => {
+	return new Promise((resolve, reject) => {
 		JWT.verify(
 			refresh_token,
 			process.env.JWT_REFRESH_SECRET,
-			async (err, payload) => {
+			(err, payload) => {
 				if (err) {
 					return reject(Boom.unauthorized());
 				}
-
-				const { user_id } = payload;
-				const user_token = await redis.get(user_id);
-
-				if (!user_token) {
-					return reject(Boom.unauthorized());
-				}
-
-				if (refresh_token === user_token) {
-					return resolve(user_id);
-				}
+				resolve(payload.user_id);
 			}
 		);
 	});

@@ -10,7 +10,6 @@ const {
 
 // validations
 const ValidationSchema = require("./validations");
-const redis = require("../../clients/redis");
 
 const Register = async (req, res, next) => {
 	const input = req.body;
@@ -97,7 +96,9 @@ const RefreshToken = async (req, res, next) => {
 		}
 
 		const user_id = await verifyRefreshToken(refresh_token);
-		const accessToken = await signAccessToken(user_id);
+		const accessToken = await signAccessToken({
+			user_id
+		});
 		const refreshToken = await signRefreshToken(user_id);
 
 		res.json({ accessToken, refreshToken });
@@ -110,13 +111,6 @@ const Logout = async (req, res, next) => {
 	try {
 		const { refresh_token } = req.body;
 		if (!refresh_token) {
-			throw Boom.badRequest();
-		}
-
-		const user_id = await verifyRefreshToken(refresh_token);
-		const data = await redis.del(user_id);
-
-		if (!data) {
 			throw Boom.badRequest();
 		}
 
