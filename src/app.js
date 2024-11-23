@@ -3,6 +3,11 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
+// Import routes
+const productRoutes = require('./routes/product');
+const authRoutes = require('./routes/auth');
+const orderRoutes = require('./routes/order');
+
 const app = express();
 
 const corsOptions = {
@@ -26,12 +31,18 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
+// Routes
+app.use('/api/product', productRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/order', orderRoutes);
+
 // Test route
 app.get('/', (req, res) => {
   res.send('Eastwing Coffee Shop API is running');
 });
-
-// Start server
+// Start server1
+// Start server2
+// Start server3
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
