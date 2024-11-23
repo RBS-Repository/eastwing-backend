@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import bcrypt from "bcrypt";
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
 
@@ -42,4 +42,4 @@ UserSchema.methods.isValidPass = async function (pass) {
 
 const User = mongoose.model("user", UserSchema);
 
-export default User;
+module.exports = User;
