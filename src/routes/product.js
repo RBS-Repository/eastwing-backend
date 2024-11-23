@@ -1,11 +1,11 @@
-import express from "express";
+const express = require("express");
 const router = express.Router();
 
-import Product from "../controllers/product";
-// import cache from '../cache';
+const Product = require("../controllers/product");
+// const cache = require('../cache');
 
-import grantAccess from "../middlewares/grantAccess";
-import { verifyAccessToken } from "../helpers/jwt";
+const grantAccess = require("../middlewares/grantAccess");
+const { verifyAccessToken } = require("../helpers/jwt");
 
 router.post(
 	"/",
@@ -25,4 +25,4 @@ router.get("/", Product.GetList);
 router.put("/:product_id", Product.Update);
 router.delete("/:product_id", Product.Delete);
 
-export default router;
+module.exports = router;

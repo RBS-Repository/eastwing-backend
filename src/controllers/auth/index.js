@@ -1,16 +1,16 @@
-import Boom from "boom";
-import User from "../../models/user";
+const Boom = require("boom");
+const User = require("../../models/user");
 
 // helpers
-import {
+const {
 	signAccessToken,
 	signRefreshToken,
 	verifyRefreshToken,
-} from "../../helpers/jwt";
+} = require("../../helpers/jwt");
 
 // validations
-import ValidationSchema from "./validations";
-import redis from "../../clients/redis";
+const ValidationSchema = require("./validations");
+const redis = require("../../clients/redis");
 
 const Register = async (req, res, next) => {
 	const input = req.body;
@@ -139,7 +139,7 @@ const Me = async (req, res, next) => {
 	}
 };
 
-export default {
+module.exports = {
 	Register,
 	Login,
 	RefreshToken,

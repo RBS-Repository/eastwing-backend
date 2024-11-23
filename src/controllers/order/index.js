@@ -1,7 +1,7 @@
-import User from '../../models/user';
-import Order from '../../models/order';
-import Boom from 'boom';
-import OrderSchema from './validations';
+const User = require('../../models/user');
+const Order = require('../../models/order');
+const Boom = require('boom');
+const OrderSchema = require('./validations');
 
 const Create = async (req, res, next) => {
   const input = req.body;
@@ -60,7 +60,7 @@ const GetMyOrders = async (req, res, next) => {
   }
 };
 
-export default {
+module.exports = {
   Create,
   List,
   GetMyOrders,

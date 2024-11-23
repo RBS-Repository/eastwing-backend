@@ -1,5 +1,5 @@
-import { roles } from '../roles';
-import Boom from 'boom';
+const { roles } = require('../roles');
+const Boom = require('boom');
 
 const grantAccess = (action, resource) => {
   return async (req, res, next) => {
@@ -13,4 +13,4 @@ const grantAccess = (action, resource) => {
   };
 };
 
-export default grantAccess;
+module.exports = grantAccess;

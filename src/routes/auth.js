@@ -1,8 +1,8 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
 
-import auth from '../controllers/auth';
-import { verifyAccessToken } from '../helpers/jwt';
+const auth = require('../controllers/auth');
+const { verifyAccessToken } = require('../helpers/jwt');
 
 router.post('/register', auth.Register);
 router.post('/login', auth.Login);
@@ -10,4 +10,4 @@ router.post('/refresh_token', auth.RefreshToken);
 router.post('/logout', auth.Logout);
 router.get('/me', verifyAccessToken, auth.Me);
 
-export default router;
+module.exports = router;

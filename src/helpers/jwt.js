@@ -1,7 +1,6 @@
-import JWT from "jsonwebtoken";
-import Boom from "boom";
-
-import redis from "../clients/redis";
+const JWT = require("jsonwebtoken");
+const Boom = require("boom");
+const redis = require("../clients/redis");
 
 const signAccessToken = (data) => {
 	return new Promise((resolve, reject) => {
@@ -93,7 +92,7 @@ const verifyRefreshToken = async (refresh_token) => {
 	});
 };
 
-export {
+module.exports = {
 	signAccessToken,
 	verifyAccessToken,
 	signRefreshToken,
