@@ -4,7 +4,7 @@
   "main": "src/app.js",
   "type": "commonjs",
   "engines": {
-    "node": "18.x"
+    "node": ">=18.x"
   },
   "license": "MIT",
   "scripts": {
