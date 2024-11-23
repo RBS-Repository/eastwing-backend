@@ -15,6 +15,7 @@ const corsOptions = {
     'https://eastwing-git-main-sobels-projects.vercel.app', 
     'https://eastwing-mtk0zk5wc-sobels-projects.vercel.app',
     'https://eastwing23-jwycxvipd-sobels-projects.vercel.app',
+    'https://eastwing23.vercel.app',
     'http://localhost:3000'
   ],
   credentials: true,
@@ -22,9 +23,12 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization']
 };
 
-// Middleware
+// Apply CORS before any route handlers
 app.use(cors(corsOptions));
 app.use(express.json());
+
+// Enable pre-flight requests for all routes
+app.options('*', cors(corsOptions));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
